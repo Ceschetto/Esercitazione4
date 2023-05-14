@@ -1,0 +1,1 @@
+typedef struct Node_Student * node_student_ptr;
