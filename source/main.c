@@ -1,5 +1,5 @@
-#include "library/car_list.h"
-#include "library/student_list.h"
+#include "../library/car_list.h"
+#include "../library/student_list.h"
 
 #include <stdio.h>
 

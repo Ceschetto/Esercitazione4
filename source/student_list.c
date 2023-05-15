@@ -15,9 +15,43 @@ struct Node_Student
 typedef struct Node_Student node_student;
 
 size_t list_len(node_student_ptr head_node);
-bool swap_condition(int choice, node_student_ptr node1, node_student_ptr node2);
+bool swap_condition(int choice, int order, node_student_ptr node1, node_student_ptr node2);
 
-order_by_id(node_student_ptr * head_node_ptrr, int choice)
+
+
+void insert_student(node_student_ptr *head_node_ptr)
+{
+    node_student_ptr new_node = NULL;
+    new_node = malloc(sizeof(node_student));
+
+    if ( new_node == NULL) return;
+
+    new_node->Next_Student = NULL;
+
+    printf("Input Name\n: ");
+    scanf("%s", &(new_node->Name));
+
+    printf("Input Surname\n: ");
+    scanf("%s", &(new_node->Surname));
+
+    printf("Input Birthdate (dd/mm/yyyy)\n: ");
+    scanf("%s", (new_node->Birth_date));
+
+    printf("Input id\n: ");
+    scanf("%s", (new_node->Id));
+
+    if (*head_node_ptr == NULL)
+    {
+        *head_node_ptr = new_node;
+    }
+    else
+    {
+        new_node->Next_Student = *head_node_ptr;
+        *head_node_ptr = new_node;
+    }
+}
+
+order_by_id(node_student_ptr * head_node_ptrr, int choice, int order)
 {
     node_student_ptr prv_node_ptr = NULL;
     node_student_ptr current_node_ptr = NULL;
@@ -37,7 +71,7 @@ order_by_id(node_student_ptr * head_node_ptrr, int choice)
         {
 
 
-            if (swap_condition(choice, current_node_ptr, next_node_ptr))
+            if (swap_condition(choice, order, current_node_ptr, next_node_ptr))
             {
 
 
@@ -62,7 +96,8 @@ order_by_id(node_student_ptr * head_node_ptrr, int choice)
                 prv_node_ptr = next_node_ptr;
                 next_node_ptr = current_node_ptr->Next_Student;
 
-            }else
+            }
+            else
             {
 
                 prv_node_ptr = current_node_ptr; 
@@ -88,30 +123,45 @@ size_t list_len(node_student_ptr current_node_ptr)
     return i;
 }
 
-
 //aggiungere l'ordine
-bool swap_condition(int choice, node_student_ptr node1, node_student_ptr node2)
+bool swap_condition(int choice, int order, node_student_ptr node1, node_student_ptr node2)
 {
     switch (choice)
     {
 
     case '1': //order_by_id
-        if (strcmp(node1->Id, node2->Id) < 0) return true;
+       
+        if(strcmp(node1->Id, node2->Id) < 0) 
+            if(order == 0) return true;
+                else return false;
+
         break;
 
 
     case '2': //order_by_birth_date
-        if (strcmp(node1->Birth_date, node2->Birth_date) < 0) return true;
+                    
+        if(strcmp(node1->Birth_date, node2->Birth_date) < 0) 
+            if(order == 0) return true;
+                else return false;
+
         break;
 
 
     case '3': //order_by_name
-        if (strcmp(node1->Name, node2->Name) < 0) return true;
+
+        if(strcmp(node1->Name, node2->Name) < 0) 
+            if(order == 0) return true;
+                else return false;
+
         break;
 
 
     case '4': //order_by_surname
-        if (strcmp(node1->Surname, node2->Surname) < 0) return true;
+
+        if(strcmp(node1->Surname, node2->Surname) < 0) 
+            if(order == 0) return true;
+                else return false;
+
         break;
 
 
